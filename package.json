@@ -1,5 +1,5 @@
 {
-  "name": "serverless-aws-alias-alb",
+  "name": "@flaconi/serverless-aws-alias-alb",
   "version": "1.0.0",
   "description": "Serverless plugin to support AWS function aliases for alb",
   "main": "index.js",
