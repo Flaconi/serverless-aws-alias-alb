@@ -21,12 +21,6 @@ class AwsAlbAlias {
                 this._masterAlias = stageStack.Outputs.MasterAliasName.Value
                 this._alias = this._options.alias || this._masterAlias;
 
-                if (this._masterAlias !== this._alias) {
-                    this._serverless.cli.log(
-                        "Moving alb to alias only works for master alias");
-                    return;
-                }
-
                 this._serverless.cli.log(
                     "Moving alb to alias stack ...");
                 const aliasResources = [];
@@ -97,6 +91,12 @@ class AwsAlbAlias {
                 aliasResources.push(targetGroups);
                 aliasResources.push(albRules);
                 aliasResources.push(albPermissions);
+
+                if (this._masterAlias !== this._alias) {
+                    this._serverless.cli.log(
+                        "Moving alb to alias only works for master alias");
+                    return;
+                }
 
                 _.forEach(aliasResources,
                     resource => _.assign(aliasStack.Resources, resource));
